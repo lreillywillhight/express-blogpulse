@@ -14,7 +14,7 @@ router.post('/', function(req, res) {
   })
   .catch(function(error) {
     res.status(400).render('main/404')
-  })
+  })  
 })
 
 // GET /articles/new - display form for creating new articles

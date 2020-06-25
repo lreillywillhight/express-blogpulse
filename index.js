@@ -21,7 +21,7 @@ app.use(function(req, res, next) {
 })
 
 // GET / - display all articles and their authors
-app.get('/', function(req, res) {
+app.get('/', (req, res) => {
   db.article.findAll({
     include: [db.author]
   }).then(function(articles) {
@@ -31,6 +31,11 @@ app.get('/', function(req, res) {
     res.status(400).render('main/404')
   })
 })
+
+// app.get('/authors', (req,res) => {
+//   db.author.findall().then
+// }
+
 
 // bring in authors and articles controllers
 app.use('/authors', require('./controllers/authors'))

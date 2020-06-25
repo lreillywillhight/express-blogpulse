@@ -4,7 +4,13 @@
   <strong><%= moment(article.createdAt).calendar() %></strong>
 </p>
 
-<p><%= article.content %></p>
+<p>  <%= article.content %></p>
+
+<p>  <%= db.article.findOne({ %> 
+      <%=   where: {id : 1} %>
+     <%= }).then(blob => { %>
+      <%=   console.log(blob.comments[0].content) %>
+     <%= }) %> </p>
 
 <hr />
 
