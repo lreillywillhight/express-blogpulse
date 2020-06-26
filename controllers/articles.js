@@ -3,46 +3,48 @@ var db = require('../models')
 var router = express.Router()
 
 // POST /articles - create a new post
-router.post('/', function(req, res) {
+router.post('/', function (req, res) {
   db.article.create({
     title: req.body.title,
     content: req.body.content,
     authorId: req.body.authorId
   })
-  .then(function(post) {
-    res.redirect('/')
-  })
-  .catch(function(error) {
-    res.status(400).render('main/404')
-  })  
+    .then(function (post) {
+      res.redirect('/')
+    })
+    .catch(function (error) {
+      res.status(400).render('main/404')
+    })
 })
 
 // GET /articles/new - display form for creating new articles
-router.get('/new', function(req, res) {
+router.get('/new', function (req, res) {
   db.author.findAll()
-  .then(function(authors) {
-    res.render('articles/new', { authors: authors })
-  })
-  .catch(function(error) {
-    res.status(400).render('main/404')
-  })
+    .then(function (authors) {
+      res.render('articles/new', { authors: authors })
+    })
+    .catch(function (error) {
+      res.status(400).render('main/404')
+    })
 })
+
+// posts an article to database,
+// loads '/:id'
+router.post
 
 // GET /articles/:id - display a specific post and its author
-router.get('/:id', function(req, res) {
+router.get('/:id', function (req, res) {
   db.article.findOne({
-    where: { id: req.params.id },
-    include: [db.author]
+    include: [db.author, db.comment],
+    where: {id: req.params.id},
   })
-  .then(function(article) {
-    if (!article) throw Error()
-    console.log(article.author)
-    res.render('articles/show', { article: article })
-  })
-  .catch(function(error) {
-    console.log(error)
-    res.status(400).render('main/404')
-  })
+    .then(function(article) {
+      // console.log(article.author)
+      // console.log(article.comments)
+      res.render('articles/show', {article: article})
+    }).catch(function (error) {
+      console.log(error)
+      res.status(400).render('main/404')
+    })
 })
-
 module.exports = router

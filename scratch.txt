@@ -5,3 +5,30 @@ content: text,
 article_id: integer
 
 sequelize model:create --name comment --attributes commenter_name:string,content:text,article_id:integer
+
+
+<p> <%= article.comments[0].dataValues.content %>  </p>
+
+
+<%= article.comments.forEach(comment => { %>
+  <%= console.log(comment) %>
+<%= }) %> 
+<hr />
+<br>
+
+
+
+<div class="commentSection">
+  <%= article.comments.forEach(comment => { %>
+  <div class="comment">
+    <p>
+      <%= comment.dataValues.content %>
+    </p>
+    <br>
+    <div class="commentNameDate">
+      <p>
+        <%= comment.dataValues.commenter_name %> + '-' + <%= moment(comment.dataValues.createdAt).calendar() %> + '-'
+      </p>
+    </div>
+  </div>
+  <%  }); %>

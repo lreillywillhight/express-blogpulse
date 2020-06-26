@@ -4,14 +4,43 @@
   <strong><%= moment(article.createdAt).calendar() %></strong>
 </p>
 
-<p>  <%= article.content %></p>
+<p> <%= article.content %></p>
 
-<p>  <%= db.article.findOne({ %> 
-      <%=   where: {id : 1} %>
-     <%= }).then(blob => { %>
-      <%=   console.log(blob.comments[0].content) %>
-     <%= }) %> </p>
 
 <hr />
 
-<a href="/">&larr; Back Home</a>
+<!-- </div> -->
+
+<div class="commentSection">
+  <% article.comments.forEach(comment => { %>
+  <div class="comment">
+    <p>
+      <%= comment.dataValues.content %>
+    </p>
+    <br>
+    <div class="commentNameDate">
+      <p>
+        <%= comment.dataValues.commenter_name %> - <%= moment(comment.dataValues.createdAt).calendar() %>
+      </p>
+    </div>
+  </div>
+  <%  }); %>
+
+<br><br>
+
+<form action="/articles/:id" method="POST">
+  <label for="name">Name:</label>
+  <input type="text" name="name" class="nameInput">
+  <br>
+  <label for="comment">Comment:</label>
+  <input type="text" name="comment" class="commentInput">
+  <br>
+
+  <input type="submit">
+</form>
+<br><br>
+
+
+
+
+  <a href="/">&larr; Back Home</a>
