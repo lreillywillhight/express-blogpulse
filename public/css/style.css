@@ -2,3 +2,13 @@
   width: 100%;
   height: auto;
 }
+
+.comment {
+  text-align: center;
+  margin: 0 auto;
+  border: 3px dotted black;
+  background-color: lightblue;
+  color: black;
+  padding-top: 14px;
+
+}

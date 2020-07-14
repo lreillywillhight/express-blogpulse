@@ -4,7 +4,6 @@ var db = require('./models')
 // var moment = require('moment')
 // var rowdy = require('rowdy-logger')
 var app = express()
-var db = require('./models')
 
 db.comment.create({
     commenter_name: 'Paul Allen',

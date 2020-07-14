@@ -30,7 +30,16 @@ router.get('/new', function (req, res) {
 
 // posts an article to database,
 // loads '/:id'
-router.post
+router.post('/:id/comment', (req,res) => {
+  console.log('BBBBBBBBBBBBBBBBB')
+  db.comment.create({
+    commenter_name: req.body.commentName,
+    content: req.body.commentText,
+    articleId: req.body.articleId
+  })
+  .then
+  res.redirect('/articles/'+req.body.articleId)
+})
 
 // GET /articles/:id - display a specific post and its author
 router.get('/:id', function (req, res) {
